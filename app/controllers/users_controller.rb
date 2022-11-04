@@ -5,12 +5,12 @@ class UsersController < ApplicationController
   def index
     @users = User.all
 
-    render json: @users, except: [:created_at, :updated_at]
+    render json: @users, includes: [:users_technologies, :technologies], except: [:created_at, :updated_at]
   end
 
   # GET /users/1
   def show
-    render json: @user
+    render json: @user, includes: [:users_technologies, :technologies]
   end
 
   # POST /users

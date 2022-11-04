@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_04_112230) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,25 +42,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_112230) do
     t.index ["user_id"], name: "index_studies_on_user_id"
   end
 
-  create_table "teches", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "technologies", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "topics", force: :cascade do |t|
-    t.string "name", null: false
-    t.boolean "completed", default: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "hours_taken"
-    t.integer "#<ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition"
   end
 
   create_table "users", force: :cascade do |t|
@@ -81,6 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_112230) do
   create_table "users_technologies", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "technology_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["technology_id"], name: "index_users_technologies_on_technology_id"
     t.index ["user_id"], name: "index_users_technologies_on_user_id"
   end

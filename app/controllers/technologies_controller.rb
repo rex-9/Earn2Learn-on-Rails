@@ -5,12 +5,12 @@ class TechnologiesController < ApplicationController
   def index
     @technologies = Technology.all
 
-    render json: @technologies
+    render json: @technologies, includes: [:users_technologies, :users], except: [:created_at, :updated_at]
   end
 
   # GET /technologies/1
   def show
-    render json: @technology
+    render json: @technology, includes: [:users_technologies, :users]
   end
 
   # POST /technologies

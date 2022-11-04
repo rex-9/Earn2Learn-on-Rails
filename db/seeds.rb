@@ -5,3 +5,16 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+rex = User.create(username: "Rex", fullname: "Htet Naing", city: "Yangon", birthdate: "18-03-2000")
+sasa = User.create(username: "SaSa", fullname: "Sa Aung Htet Nyein", city: "Yangon", birthdate: "07-11-1999")
+
+react = Technology.create(name: "React")
+ruby = Technology.create(name: "Ruby")
+
+study1 = Study.create(topic: "State Management", user_id: 1, technology_id: 1)
+study2 = Study.create(topic: "Object Oriented Programming", user_id: 2, technology_id: 2)
+
+certificate = Certificate.create(title: "React Master", link: "https://www.credential.net/profile/htetnaingnaing703191/wallet", user_id: 1, technology_id: 1)
+
+rex.technologies << [react, ruby]
