@@ -10,12 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_04_095810) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_04_112230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "certificates", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "link", null: false
+    t.date "achieved_date"
+    t.date "expiration_date"
+    t.bigint "user_id", null: false
+    t.bigint "technology_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["technology_id"], name: "index_certificates_on_technology_id"
+    t.index ["title"], name: "index_certificates_on_title"
+    t.index ["user_id"], name: "index_certificates_on_user_id"
+  end
+
+  create_table "studies", force: :cascade do |t|
+    t.string "topic", null: false
+    t.text "experience"
+    t.boolean "completed", default: false
+    t.integer "hours_taken", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.bigint "technology_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["technology_id"], name: "index_studies_on_technology_id"
+    t.index ["topic"], name: "index_studies_on_topic"
+    t.index ["user_id"], name: "index_studies_on_user_id"
+  end
+
   create_table "teches", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "technologies", force: :cascade do |t|
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -44,4 +78,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_095810) do
     t.index ["username"], name: "index_users_on_username"
   end
 
+  create_table "users_technologies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "technology_id", null: false
+    t.index ["technology_id"], name: "index_users_technologies_on_technology_id"
+    t.index ["user_id"], name: "index_users_technologies_on_user_id"
+  end
+
+  add_foreign_key "certificates", "technologies"
+  add_foreign_key "certificates", "users"
+  add_foreign_key "studies", "technologies"
+  add_foreign_key "studies", "users"
+  add_foreign_key "users_technologies", "technologies"
+  add_foreign_key "users_technologies", "users"
 end
