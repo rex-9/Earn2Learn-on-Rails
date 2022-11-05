@@ -21,6 +21,7 @@ class StudiesController < ApplicationController
   # POST /studies
   def create
     @study = Study.new(study_params)
+    @users_technologies = UsersTechnology.create(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
 
     if @study.save
       render json: @study, status: :created
