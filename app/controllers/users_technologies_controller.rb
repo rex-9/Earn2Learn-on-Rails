@@ -1,4 +1,5 @@
 class UsersTechnologiesController < ApplicationController
+  before_action :authorize
   before_action :set_users_technology, only: %i[ show update destroy ]
 
   def user

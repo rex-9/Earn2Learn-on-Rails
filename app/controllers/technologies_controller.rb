@@ -1,4 +1,5 @@
 class TechnologiesController < ApplicationController
+  before_action :authorize
   before_action :set_technology, only: %i[ show update destroy ]
 
   # GET /technologies

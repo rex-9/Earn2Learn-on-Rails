@@ -1,4 +1,5 @@
 class CertificatesController < ApplicationController
+  before_action :authorize
   before_action :set_certificate, only: %i[ show update destroy ]
 
   # GET /certificates
