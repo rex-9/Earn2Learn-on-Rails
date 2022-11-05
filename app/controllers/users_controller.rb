@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show update destroy ]
 
+  # POST /users/login
   def login
     user = User.find_by(email: params[:email])
     if user&.authenticate(params[:password])
@@ -33,12 +34,6 @@ class UsersController < ApplicationController
     else
       render json: @user.errors,  status: :unprocessable_entity
     end
-
-    # if @user.save
-    #   render json: @user, status: :created, location: @user
-    # else
-    #   render json: @user.errors, status: :unprocessable_entity
-    # end
   end
 
   # PATCH/PUT /users/1
