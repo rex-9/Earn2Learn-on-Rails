@@ -7,14 +7,17 @@ Rails.application.routes.draw do
   resources :users_technologies
 
   resources :technologies do
-    resources :studies
-    resources :certificates
+    resources :studies, only: [:index]
+    resources :certificates, only: [:index]
   end
 
   resources :users do
-    resources :studies
-    resources :certificates
+    resources :studies, only: [:index]
+    resources :certificates, only: [:index]
   end
+
+  resources :studies, only: [:show, :create, :update, :destroy]
+  resources :certificates, only: [:show, :create, :update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

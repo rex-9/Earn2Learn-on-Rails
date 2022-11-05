@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize
+  before_action :authorize, except: [:create, :login]
   before_action :set_user, only: %i[ show update destroy ]
 
   # POST /users/login
@@ -15,14 +15,18 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    users = User.all
+    users = User.all.order(:id)
 
     render json: users, includes: [:users_technologies, :technologies], except: [:created_at, :updated_at]
   end
 
   # GET /users/1
   def show
-    render json: @user, includes: [:users_technologies, :technologies]
+    if @user
+      render json: @user, includes: [:users_technologies, :technologies]
+    else
+      render json: { message: "User not found" }, status: :unprocessable_entity
+    end
   end
 
   # POST /users
@@ -48,13 +52,21 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
+    if @user
+      if @user.destroy
+        render json: { deleted: @user }
+      else
+        render json: { error: "Can't delete the User" }, status: :unprocessable_entity
+      end
+    else
+      render json: { message: "User not found" }, status: :unprocessable_entity
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

@@ -4,14 +4,18 @@ class TechnologiesController < ApplicationController
 
   # GET /technologies
   def index
-    @technologies = Technology.all
+    @technologies = Technology.all.order(:id)
 
     render json: @technologies, includes: [:users_technologies, :users], except: [:created_at, :updated_at]
   end
 
   # GET /technologies/1
   def show
-    render json: @technology, includes: [:users_technologies, :users]
+    if @technology
+      render json: @technology, includes: [:users_technologies, :users]
+    else
+      render json: { message: "Technology not found" }, status: :unprocessable_entity
+    end
   end
 
   # POST /technologies
@@ -19,7 +23,7 @@ class TechnologiesController < ApplicationController
     @technology = Technology.new(technology_params)
 
     if @technology.save
-      render json: @technology, status: :created, location: @technology
+      render json: @technology, status: :created
     else
       render json: @technology.errors, status: :unprocessable_entity
     end
@@ -36,13 +40,22 @@ class TechnologiesController < ApplicationController
 
   # DELETE /technologies/1
   def destroy
-    @technology.destroy
+    if @technology
+      if @technology.destroy
+        render json: { deleted: @technology }
+      else
+        render json: { error: "Can't delete the Technology" }, status: :unprocessable_entity
+      end
+    else
+      render json: { message: "Technology not found" }, status: :unprocessable_entity
+    end
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_technology
-      @technology = Technology.find(params[:id])
+      @technology = Technology.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

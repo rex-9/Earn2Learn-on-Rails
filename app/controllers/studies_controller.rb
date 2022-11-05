@@ -4,14 +4,18 @@ class StudiesController < ApplicationController
 
   # GET /studies
   def index
-    @studies = Study.all
+    @studies = Study.all.order(:id)
 
     render json: @studies
   end
 
   # GET /studies/1
   def show
-    render json: @study
+    if @study
+      render json: @study
+    else
+      render json: { message: "Study not found" }, status: :unprocessable_entity
+    end
   end
 
   # POST /studies
@@ -19,7 +23,7 @@ class StudiesController < ApplicationController
     @study = Study.new(study_params)
 
     if @study.save
-      render json: @study, status: :created, location: @study
+      render json: @study, status: :created
     else
       render json: @study.errors, status: :unprocessable_entity
     end
@@ -36,17 +40,25 @@ class StudiesController < ApplicationController
 
   # DELETE /studies/1
   def destroy
-    @study.destroy
+    if @study
+      if @study.destroy
+        render json: { deleted: @study }
+      else
+        render json: { error: "Can't delete the Study" }, status: :unprocessable_entity
+      end
+    else
+      render json: { message: "Study not found" }, status: :unprocessable_entity
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_study
-      @study = Study.find(params[:id])
+      @study = Study.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def study_params
-      params.require(:study).permit(:name)
+      params.permit(:topic, :user_id, :technology_id)
     end
 end
