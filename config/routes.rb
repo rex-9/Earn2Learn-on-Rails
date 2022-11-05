@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'users/login', to: 'users#login'
 
   get '/user/:id/technologies', to: 'users_technologies#user'
   get '/technology/:id/users', to: 'users_technologies#technology'
