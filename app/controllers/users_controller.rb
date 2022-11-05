@@ -53,10 +53,14 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if @user
-      if @user.destroy
-        render json: { deleted: @user }
+      if @user.studies.length > 0 || @user.users_technologies.length > 0 || @user.certificates.length > 0
+        render json: { error: "User can't be deleted. This user, #{@user.username} has association to #{@user.studies.length}-Studies, #{@user.certificates.length}-Certificates and #{@user.technologies.length}-Technologies." }, status: :unprocessable_entity
       else
-        render json: { error: "Can't delete the User" }, status: :unprocessable_entity
+        if @user.destroy
+          render json: { deleted: @user }
+        else
+          render json: @user.errors, status: :unprocessable_entity
+        end
       end
     else
       render json: { message: "User not found" }, status: :unprocessable_entity

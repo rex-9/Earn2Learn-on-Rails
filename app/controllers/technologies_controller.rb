@@ -41,10 +41,14 @@ class TechnologiesController < ApplicationController
   # DELETE /technologies/1
   def destroy
     if @technology
-      if @technology.destroy
-        render json: { deleted: @technology }
+      if @technology.studies.length > 0 || @technology.users_technologies.length > 0 || @technology.certificates.length > 0
+        render json: { error: "Technology can't be deleted. This technology, #{@technology.name} has association to #{@technology.studies.length}-Studies, #{@technology.certificates.length}-Certificates and #{@technology.users.length}-Users." }, status: :unprocessable_entity
       else
-        render json: { error: "Can't delete the Technology" }, status: :unprocessable_entity
+        if @technology.destroy
+          render json: { deleted: @technology }
+        else
+          render json: { error: "Can't delete the Technology" }, status: :unprocessable_entity
+        end
       end
     else
       render json: { message: "Technology not found" }, status: :unprocessable_entity
