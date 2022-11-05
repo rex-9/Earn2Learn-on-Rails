@@ -77,8 +77,6 @@ GEM
     builder (3.2.4)
     case_transform (0.2)
       activesupport
-    composite_primary_keys (14.0.4)
-      activerecord (~> 7.0.2)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     debug (1.6.3)
@@ -169,7 +167,6 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.13)
   bcrypt (~> 3.1.7)
   bootsnap
-  composite_primary_keys (~> 14.0)
   debug
   jwt (~> 2.5)
   pg (~> 1.4)

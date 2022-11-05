@@ -46,10 +46,7 @@ group :development do
   # gem "spring"
 end
 
-
 gem "pg", "~> 1.4"
-
-gem "composite_primary_keys", "~> 14.0"
 
 gem "active_model_serializers", "~> 0.10.13"
 

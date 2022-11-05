@@ -6,8 +6,8 @@ class CreateStudies < ActiveRecord::Migration[7.0]
       t.boolean :completed,       default: false
       t.integer :hours_taken,     default: 0, null: false
 
-      t.references :user,         null: false, foreign_key: true, index: true
-      t.references :technology,   null: false, foreign_key: true, index: true
+      t.belongs_to :user
+      t.belongs_to :technology
 
       t.timestamps
     end

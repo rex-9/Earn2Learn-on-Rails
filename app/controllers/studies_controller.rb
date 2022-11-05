@@ -4,7 +4,7 @@ class StudiesController < ApplicationController
 
   # GET /studies
   def index
-    @studies = Study.all.order(:id)
+    @studies = Study.all.order(:topic)
 
     render json: @studies
   end
@@ -20,13 +20,19 @@ class StudiesController < ApplicationController
 
   # POST /studies
   def create
-    @study = Study.new(study_params)
-    @users_technologies = UsersTechnology.create(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
+    existing_study = Study.find_by(topic: study_params[:topic], user_id: study_params[:user_id], technology_id: study_params[:technology_id])
+    existing_join = UsersTechnology.find_by(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
 
-    if @study.save
+    if !existing_join
+      user_technologies = UsersTechnology.create(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
+    end
+
+    if !existing_study
+      @study = Study.new(study_params)
+      @study.save
       render json: @study, status: :created
     else
-      render json: @study.errors, status: :unprocessable_entity
+      render json: { error: "Duplicate Topic for the specific Technology by a specific User" }, status: :unprocessable_entity
     end
   end
 

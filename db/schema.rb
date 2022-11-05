@@ -33,8 +33,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.text "experience"
     t.boolean "completed", default: false
     t.integer "hours_taken", default: 0, null: false
-    t.bigint "user_id", null: false
-    t.bigint "technology_id", null: false
+    t.bigint "user_id"
+    t.bigint "technology_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["technology_id"], name: "index_studies_on_technology_id"
@@ -66,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
   end
 
   create_table "users_technologies", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "technology_id", null: false
+    t.bigint "user_id"
+    t.bigint "technology_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["technology_id"], name: "index_users_technologies_on_technology_id"
@@ -76,8 +76,4 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
 
   add_foreign_key "certificates", "technologies"
   add_foreign_key "certificates", "users"
-  add_foreign_key "studies", "technologies"
-  add_foreign_key "studies", "users"
-  add_foreign_key "users_technologies", "technologies"
-  add_foreign_key "users_technologies", "users"
 end
