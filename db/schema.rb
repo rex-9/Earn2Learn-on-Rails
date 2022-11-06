@@ -57,6 +57,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.text "bio"
     t.string "city", null: false
     t.date "birthdate", null: false
+    t.date "phone", null: false
     t.string "role", default: "learner", null: false
     t.string "github"
     t.string "linkedin"
