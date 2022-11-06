@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
 
-  has_many :users_technologies
-  has_many :technologies,                       through: :users_technologies
+  has_many :professions
+  has_many :technologies,                       through: :professions
 
   has_many :studies
   has_many :certificates

@@ -1,6 +1,6 @@
-class CreateUsersTechnologies < ActiveRecord::Migration[7.0]
+class CreateProfessions < ActiveRecord::Migration[7.0]
   def change
-    create_table :users_technologies do |t|
+    create_table :professions do |t|
       t.belongs_to :user
       t.belongs_to :technology
 

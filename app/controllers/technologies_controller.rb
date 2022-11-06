@@ -6,13 +6,13 @@ class TechnologiesController < ApplicationController
   def index
     @technologies = Technology.all.order(:id)
 
-    render json: @technologies, includes: [:users_technologies, :users], except: [:created_at, :updated_at]
+    render json: @technologies, includes: [:professions, :users], except: [:created_at, :updated_at]
   end
 
   # GET /technologies/1
   def show
     if @technology
-      render json: @technology, includes: [:users_technologies, :users]
+      render json: @technology, includes: [:professions, :users]
     else
       render json: { message: "Technology not found" }, status: :unprocessable_entity
     end
@@ -41,7 +41,7 @@ class TechnologiesController < ApplicationController
   # DELETE /technologies/1
   def destroy
     if @technology
-      if @technology.studies.length > 0 || @technology.users_technologies.length > 0 || @technology.certificates.length > 0
+      if @technology.studies.length > 0 || @technology.professions.length > 0 || @technology.certificates.length > 0
         render json: { error: "Technology can't be deleted. This technology, #{@technology.name} has association to #{@technology.studies.length}-Studies, #{@technology.certificates.length}-Certificates and #{@technology.users.length}-Users." }, status: :unprocessable_entity
       else
         if @technology.destroy

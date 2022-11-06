@@ -1,6 +1,6 @@
 class Technology < ApplicationRecord
-  has_many :users_technologies
-  has_many :users,          through: :users_technologies
+  has_many :professions
+  has_many :users,          through: :professions
 
   has_many :studies
   has_many :certificates

@@ -21,10 +21,10 @@ class StudiesController < ApplicationController
   # POST /studies
   def create
     existing_study = Study.find_by(topic: study_params[:topic], user_id: study_params[:user_id], technology_id: study_params[:technology_id])
-    existing_join = UsersTechnology.find_by(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
+    existing_join = Profession.find_by(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
 
     if !existing_join
-      user_technologies = UsersTechnology.create(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
+      Profession.create(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
     end
 
     if !existing_study

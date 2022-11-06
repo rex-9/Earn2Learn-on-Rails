@@ -28,6 +28,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.index ["user_id"], name: "index_certificates_on_user_id"
   end
 
+  create_table "professions", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "technology_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["technology_id"], name: "index_professions_on_technology_id"
+    t.index ["user_id"], name: "index_professions_on_user_id"
+  end
+
   create_table "studies", force: :cascade do |t|
     t.string "topic", null: false
     t.text "experience"
@@ -57,22 +66,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.text "bio"
     t.string "city", null: false
     t.date "birthdate", null: false
-    t.date "phone", null: false
+    t.string "phone", null: false
     t.string "role", default: "learner", null: false
     t.string "github"
     t.string "linkedin"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username"
-  end
-
-  create_table "users_technologies", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "technology_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["technology_id"], name: "index_users_technologies_on_technology_id"
-    t.index ["user_id"], name: "index_users_technologies_on_user_id"
   end
 
   add_foreign_key "certificates", "technologies"

@@ -17,13 +17,13 @@ class UsersController < ApplicationController
   def index
     users = User.all.order(:id)
 
-    render json: users, includes: [:users_technologies, :technologies], except: [:created_at, :updated_at]
+    render json: users, includes: [:professions, :technologies], except: [:created_at, :updated_at]
   end
 
   # GET /users/1
   def show
     if @user
-      render json: @user, includes: [:users_technologies, :technologies]
+      render json: @user, includes: [:professions, :technologies]
     else
       render json: { message: "User not found" }, status: :unprocessable_entity
     end
@@ -53,7 +53,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   def destroy
     if @user
-      if @user.studies.length > 0 || @user.users_technologies.length > 0 || @user.certificates.length > 0
+      if @user.studies.length > 0 || @user.professions.length > 0 || @user.certificates.length > 0
         render json: { error: "User can't be deleted. This user, #{@user.username} has association to #{@user.studies.length}-Studies, #{@user.certificates.length}-Certificates and #{@user.technologies.length}-Technologies." }, status: :unprocessable_entity
       else
         if @user.destroy

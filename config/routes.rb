@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   post 'users/login', to: 'users#login'
 
-  get '/user/:id/technologies', to: 'users_technologies#user'
-  get '/technology/:id/users', to: 'users_technologies#technology'
+  get '/user/:id/technologies', to: 'professions#user'
+  get '/technology/:id/users', to: 'professions#technology'
 
-  resources :users_technologies
+  # resources :professions
 
   resources :technologies do
     resources :studies, only: [:index]
