@@ -31,13 +31,13 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
-    @user = User.create(user_params)
+    user = User.create(user_params)
 
-    if @user.valid?
-      token = encode_token({ user_id: @user.id })
-      render json: { user: @user, token: token }, status: :created, except: [:password_digest, :created_at, :updated_at]
+    if user.valid?
+      token = encode_token({ user_id: user.id })
+      render json: { user: user, token: token }, status: :created, except: [:password_digest, :created_at, :updated_at]
     else
-      render json: @user.errors,  status: :unprocessable_entity
+      render json: user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -75,6 +75,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :fullname, :city, :birthdate, :email, :password)
+      params.permit(:username, :fullname, :city, :phone, :birthdate, :email, :password)
     end
 end

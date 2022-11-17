@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.text :bio
       t.string :city,                 null: false
       t.date :birthdate,              null: false
-      t.string :phone,                null: false
+      t.string :phone,                null: false, unique: true
       t.string :role,                 null: false, default: 'learner'
       t.string :github
       t.string :linkedin

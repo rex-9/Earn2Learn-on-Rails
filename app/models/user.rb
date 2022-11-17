@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :studies
   has_many :certificates
 
-  validates :username, :email, :phone,          presence: true, uniqueness: true
-  validates :fullname, :city, :birthdate,       presence: true
+  validates :username, :email, :phone,          uniqueness: true
+  validates :fullname, :city, :birthdate, :username, :email, :phone,       presence: true
 end
