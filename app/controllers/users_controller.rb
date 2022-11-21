@@ -5,11 +5,15 @@ class UsersController < ApplicationController
   # POST /users/login
   def login
     user = User.find_by(email: params[:email])
-    if user&.authenticate(params[:password])
-      token = encode_token({ user_id: user.id })
-      render json: { user: user, token: token }, status: 200, except: [:password_digest, :created_at, :updated_at]
+    if user
+      if user.authenticate(params[:password])
+        token = encode_token({ user_id: user.id })
+        render json: { user: user, token: token }, status: 200, except: [:password_digest, :created_at, :updated_at]
+      else
+        render json: { error: "Invalid Password" }, status: :unauthorized
+      end
     else
-      render json: { error: 'Invalid email or password' }, status: :unauthorized
+      render json: { error: "User not found" }, status: :unauthorized
     end
   end
 
@@ -37,7 +41,7 @@ class UsersController < ApplicationController
       token = encode_token({ user_id: user.id })
       render json: { user: user, token: token }, status: :created, except: [:password_digest, :created_at, :updated_at]
     else
-      render json: user.errors.full_messages, status: :unprocessable_entity
+      render json: { error: user.errors.full_messages}, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +50,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render json: @user.errors, status: :unprocessable_entity
+      render json: { error: user.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -75,6 +79,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :fullname, :city, :phone, :birthdate, :email, :password)
+      params.permit(:username, :fullname, :bio, :city, :phone, :birthdate, :email, :password, :image, :github, :linkedin)
     end
 end

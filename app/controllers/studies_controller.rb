@@ -66,6 +66,6 @@ class StudiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def study_params
-      params.permit(:topic, :user_id, :technology_id)
+      params.permit(:topic, :experience, :completed, :hours_taken, :user_id, :technology_id)
     end
 end
