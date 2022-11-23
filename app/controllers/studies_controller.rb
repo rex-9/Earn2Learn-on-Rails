@@ -11,10 +11,10 @@ class StudiesController < ApplicationController
 
   # GET /studies/1
   def show
-    if @study
-      render json: @study
+    if study
+      render json: { data: study, status: "success" }
     else
-      render json: { message: "Study not found" }, status: :unprocessable_entity
+      render json: { error: "Study not found", status: "failure" }, status: :unprocessable_entity
     end
   end
 
@@ -28,20 +28,20 @@ class StudiesController < ApplicationController
     end
 
     if !existing_study
-      @study = Study.new(study_params)
-      @study.save
-      render json: @study, status: :created
+      study = Study.new(study_params)
+      study.save
+      render json: { data: study, status: "success" }, status: :created
     else
-      render json: { error: "Duplicate Topic for the specific Technology by a specific User" }, status: :unprocessable_entity
+      render json: { error: "Duplicate Topic for the specific Technology by a specific User", status: "failure" }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /studies/1
   def update
     if @study.update(study_params)
-      render json: @study
+      render json: { data: @study, status: "success" }
     else
-      render json: @study.errors, status: :unprocessable_entity
+      render json: { error: @study.errors, status: "failure" }, status: :unprocessable_entity
     end
   end
 
@@ -49,12 +49,12 @@ class StudiesController < ApplicationController
   def destroy
     if @study
       if @study.destroy
-        render json: { deleted: @study }
+        render json: { deleted: @study, status: "success" }
       else
         render json: { error: "Can't delete the Study" }, status: :unprocessable_entity
       end
     else
-      render json: { message: "Study not found" }, status: :unprocessable_entity
+      render json: { message: "Study not found", status: "failure" }, status: :unprocessable_entity
     end
   end
 
