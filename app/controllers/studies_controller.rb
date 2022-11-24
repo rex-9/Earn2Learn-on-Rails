@@ -11,8 +11,8 @@ class StudiesController < ApplicationController
 
   # GET /studies/1
   def show
-    if study
-      render json: { data: study, status: "success" }
+    if @study
+      render json: @study
     else
       render json: { error: "Study not found", status: "failure" }, status: :unprocessable_entity
     end

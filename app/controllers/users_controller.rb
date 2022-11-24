@@ -21,13 +21,13 @@ class UsersController < ApplicationController
   def index
     users = User.all.order(:id)
 
-    render json: { data: users, status: "success"}, includes: [:professions, :technologies], except: [:created_at, :updated_at]
+    render json: users, includes: [:professions, :technologies], except: [:created_at, :updated_at]
   end
 
   # GET /users/1
   def show
-    if user
-      render json: { data: user, status: "success" }, includes: [:professions, :technologies]
+    if @user
+      render json: @user, includes: [:professions, :technologies]
     else
       render json: { message: "User not found", status: "failure" }, status: :unprocessable_entity
     end
@@ -47,23 +47,23 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if user.update(user_params)
-      render json: {data: user, status: "success"}
+    if @user.update(user_params)
+      render json: { data: @user, status: "success" }
     else
-      render json: { error: user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
+      render json: { error: @user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
     end
   end
 
   # DELETE /users/1
   def destroy
-    if user
-      if user.studies.length > 0 || user.professions.length > 0 || user.certificates.length > 0
+    if @user
+      if @user.studies.length > 0 || @user.professions.length > 0 || @user.certificates.length > 0
         render json: { error: "User can't be deleted. This user, #{user.username} has association to #{user.studies.length}-Studies, #{user.certificates.length}-Certificates and #{user.technologies.length}-Technologies." }, status: :unprocessable_entity
       else
-        if user.destroy
-          render json: { deleted: user }
+        if @user.destroy
+          render json: { deleted: @user }
         else
-          render json: user.errors, status: :unprocessable_entity
+          render json: @user.errors, status: :unprocessable_entity
         end
       end
     else
@@ -74,7 +74,7 @@ class UsersController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
-      user = User.find_by(id: params[:id])
+      @user = User.find_by(id: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
