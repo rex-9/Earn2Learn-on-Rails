@@ -26,6 +26,6 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  # database: api_on_rails_production
-  # port: 5433
+  # database: earn2learn-on-rails
+  # port: 5432
   # user: postgres
