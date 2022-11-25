@@ -25,6 +25,7 @@ test:
 
 production:
   <<: *default
-  database: api_on_rails_production
-  port: 5433
-  user: postgres
+  url: <%= ENV['DATABASE_URL'] %>
+  # database: api_on_rails_production
+  # port: 5433
+  # user: postgres
