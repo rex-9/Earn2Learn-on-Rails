@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   # GET /users/1
   def show
     if @user
-      render json: @user, includes: [:professions, :technologies]
+      render json: @user
     else
       render json: { message: "User not found", status: "failure" }, status: :unprocessable_entity
     end
