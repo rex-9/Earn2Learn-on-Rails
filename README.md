@@ -142,7 +142,7 @@ To run the project, execute the following command:
 #### 7. Run the server on port 3001:
 
 ```
-rails server -p 3001
+rails server
 ```
 ### Run tests
 
