@@ -4,7 +4,7 @@ class UsersController < ApplicationController
 
   # POST /users/login
   def login
-    user = User.find_by(email: params[:email])
+    user = User.where('username LIKE :query OR email LIKE :query', query: "%#{params[:auth]}%").first
     if user
       if user.authenticate(params[:password])
         token = encode_token({ user_id: user.id })
