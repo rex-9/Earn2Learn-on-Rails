@@ -1,5 +1,5 @@
 class StudiesController < ApplicationController
-  before_action :authorize
+  before_action :authorize, except: [:index]
   before_action :set_study, only: %i[ show update destroy ]
 
   # GET /studies

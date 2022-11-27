@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorize, except: [:create, :login]
+  before_action :authorize, except: [:create, :login, :index, :show]
   before_action :set_user, only: %i[ show update destroy ]
 
   # POST /users/login
