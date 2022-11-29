@@ -6,13 +6,13 @@ class StudiesController < ApplicationController
   def index
     @studies = Study.all.order(:topic)
 
-    render json: @studies
+    render json: @studies, include: [:user, :technology], except: [:created_at, :updated_at]
   end
 
   # GET /studies/1
   def show
     if @study
-      render json: @study
+      render json: @study, include: [:user, :technology], except: [:created_at, :updated_at]
     else
       render json: { error: "Study not found", status: "failure" }, status: :unprocessable_entity
     end
