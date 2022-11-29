@@ -6,13 +6,13 @@ class CertificatesController < ApplicationController
   def index
     @certificates = Certificate.all.order(:id)
 
-    render json: @certificates
+    render json: @certificates, include: [:user, :technology]
   end
 
   # GET /certificates/1
   def show
     if @certificate
-      render json: @certificate
+      render json: @certificate, include: [:user, :technology]
     else
       render json: { message: "Certificate not found" }, status: :unprocessable_entity
     end
@@ -32,9 +32,9 @@ class CertificatesController < ApplicationController
   # PATCH/PUT /certificates/1
   def update
     if @certificate.update(certificate_params)
-      render json: @certificate
+      render json: { data: @certificate, status: "success" }
     else
-      render json: @certificate.errors, status: :unprocessable_entity
+      render json: { error: @certificate.errors, status: "failure" }, status: :unprocessable_entity
     end
   end
 

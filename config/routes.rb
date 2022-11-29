@@ -4,20 +4,15 @@ Rails.application.routes.draw do
   get '/user/:id/technologies', to: 'professions#user'
   get '/technology/:id/users', to: 'professions#technology'
 
-  # resources :professions
-
   resources :technologies do
     resources :studies, only: [:index]
     resources :certificates, only: [:index]
   end
 
-  resources :users do
-    resources :studies, only: [:index]
-    resources :certificates, only: [:index]
-  end
+  resources :users, only: [:index, :show, :create, :update, :destroy]
 
-  resources :studies, only: [:show, :create, :update, :destroy]
-  resources :certificates, only: [:show, :create, :update, :destroy]
+  resources :studies, only: [:index, :show, :create, :update, :destroy]
+  resources :certificates, only: [:index, :show, :create, :update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
