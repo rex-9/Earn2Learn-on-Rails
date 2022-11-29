@@ -4,6 +4,13 @@ class StudiesController < ApplicationController
 
   # GET /studies
   def index
+    @studies = User.find(params[:user_id]).studies.order(:topic)
+
+    render json: @studies, include: [:user, :technology], except: [:created_at, :updated_at]
+  end
+
+  # GET /studies
+  def all
     @studies = Study.all.order(:topic)
 
     render json: @studies, include: [:user, :technology], except: [:created_at, :updated_at]
@@ -18,7 +25,7 @@ class StudiesController < ApplicationController
     end
   end
 
-  # POST /studies
+  # POST /users/:user_id/studies
   def create
     existing_study = Study.find_by(topic: study_params[:topic], user_id: study_params[:user_id], technology_id: study_params[:technology_id])
     existing_join = Profession.find_by(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
