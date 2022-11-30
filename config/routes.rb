@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get '/studies', to: 'studies#all'
 
   get '/user/:id/technologies', to: 'professions#user'
+  get '/user/:id/likes', to: 'likes#user'
+  get '/user/:id/comments', to: 'comments#user'
+
   get '/technology/:id/users', to: 'professions#technology'
 
   resources :technologies do
@@ -15,8 +18,15 @@ Rails.application.routes.draw do
     resources :studies, only: [:index]
   end
 
+  resources :studies do
+    resources :likes, only: [:index]
+    resources :comments, only: [:index]
+  end
+
   resources :studies, only: [:show, :create, :update, :destroy]
   resources :certificates, only: [:index, :show, :create, :update, :destroy]
+  resources :likes, only: [:show, :create]
+  resources :comments, only: [:show, :create, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
