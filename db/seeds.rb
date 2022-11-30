@@ -6,16 +6,29 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-rex = User.create(
+dante = User.create(
   email: "dante@dmc.com",
+  password: "password",
+  username: "Dante",
+  fullname: "Htet Naing",
+  goal: "Devil Hunter",
+  city: "Yangon",
+  role: "admin",
+  birthdate: "18-03-2000",
+  phone: "09443112251"
+)
+
+rex = User.create(
+  email: "rex@soul.com",
   password: "password",
   username: "Rex",
   fullname: "Htet Naing",
   goal: "Software Developer",
   city: "Yangon",
   birthdate: "18-03-2000",
-  phone: "09443112251"
+  phone: "094431122510"
 )
+
 sasa = User.create(
   email: "sasa@sasa.com",
   password: "password",
@@ -41,6 +54,15 @@ study2 = Study.create(
   technology_id: 2
 )
 
+Profession.create(
+  user_id: 1,
+  technology_id: react.id,
+)
+Profession.create(
+  user_id: 2,
+  technology_id: ruby.id,
+)
+
 certificate = Certificate.create(
   title: "React Master",
   link: "https://www.credential.net/profile/htetnaingnaing703191/wallet",
@@ -54,10 +76,19 @@ Like.create(
   study_id: 1,
 )
 
+Like.create(
+  user_id: 1,
+  study_id: 2,
+)
+
 Comment.create(
-  content: "This is a comment",
+  content: "The First comment",
   user_id: 1,
   study_id: 1,
 )
 
-rex.technologies << [react, ruby]
+Comment.create(
+  content: "The Second comment",
+  user_id: 1,
+  study_id: 2,
+)
