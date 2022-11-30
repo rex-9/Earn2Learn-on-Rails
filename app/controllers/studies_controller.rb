@@ -25,7 +25,7 @@ class StudiesController < ApplicationController
     end
   end
 
-  # POST /users/:user_id/studies
+  # POST /studies
   def create
     existing_study = Study.find_by(topic: study_params[:topic], user_id: study_params[:user_id], technology_id: study_params[:technology_id])
     existing_join = Profession.find_by(user_id: study_params[:user_id], technology_id: study_params[:technology_id])
@@ -56,7 +56,7 @@ class StudiesController < ApplicationController
   def destroy
     if @study
       if @study.destroy
-        render json: { deleted: @study, status: "success" }
+        render json: { data: @study, status: "success" }
       else
         render json: { error: "Can't delete the Study" }, status: :unprocessable_entity
       end

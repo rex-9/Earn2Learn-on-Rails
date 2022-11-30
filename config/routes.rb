@@ -12,10 +12,10 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    resources :studies, only: [:index, :create]
+    resources :studies, only: [:index]
   end
 
-  resources :studies, only: [:show, :update, :destroy]
+  resources :studies, only: [:show, :create, :update, :destroy]
   resources :certificates, only: [:index, :show, :create, :update, :destroy]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

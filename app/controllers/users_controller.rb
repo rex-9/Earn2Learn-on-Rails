@@ -29,7 +29,7 @@ class UsersController < ApplicationController
     if @user
       render json: @user, include: [:studies, :technologies, :certificates], except: [:password_digest, :created_at, :updated_at]
     else
-      render json: { message: "User not found", status: "failure" }, status: :unprocessable_entity
+      render json: { error: "User not found", status: "failure" }, status: :unprocessable_entity
     end
   end
 
@@ -39,7 +39,7 @@ class UsersController < ApplicationController
 
     if user.valid?
       token = encode_token({ user_id: user.id })
-      render json: { user: user, token: token, status: "success" }, status: :created, except: [:password_digest, :created_at, :updated_at]
+      render json: { data: user, token: token, status: "success" }, status: :created, except: [:password_digest, :created_at, :updated_at]
     else
       render json: { error: user.errors.full_messages, status: "failure"}, status: :unprocessable_entity
     end
