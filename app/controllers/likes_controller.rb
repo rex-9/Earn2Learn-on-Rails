@@ -1,15 +1,14 @@
 class LikesController < ApplicationController
   before_action :authorize, except: [:index]
-  before_action :set_like, only: %i[ show ]
 
   def index
-    @likes = Like.where(study_id: params[:study_id])
-    render json: @likes, except: [:created_at, :updated_at]
+    likes = Like.where(study_id: params[:study_id])
+    render json: likes, except: [:created_at, :updated_at]
   end
 
   def user
-    @likes = Like.where(user_id: params[:id])
-    render json: @likes, except: [:created_at, :updated_at]
+    likes = Like.where(user_id: params[:id])
+    render json: likes, except: [:created_at, :updated_at]
   end
 
   def create
@@ -32,11 +31,6 @@ class LikesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_like
-      @like = Like.find_by(id: params[:id])
-    end
-
     # Only allow a list of trusted parameters through.
     def like_params
       params.permit(:user_id, :study_id)
