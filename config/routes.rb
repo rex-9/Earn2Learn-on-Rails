@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   get '/studies', to: 'studies#all'
 
-  get '/user/:id/technologies', to: 'professions#user'
-  get '/user/:id/likes', to: 'likes#user'
-  get '/user/:id/comments', to: 'comments#user'
+  get '/users/:id/technologies', to: 'professions#user'
+  get '/users/:id/likes', to: 'likes#user'
+  get '/users/:id/comments', to: 'comments#user'
 
-  get '/technology/:id/users', to: 'professions#technology'
+  get '/technologies/:id/users', to: 'professions#technology'
 
   resources :technologies do
     resources :studies, only: [:index]

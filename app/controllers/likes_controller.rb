@@ -3,8 +3,13 @@ class LikesController < ApplicationController
   before_action :set_like, only: %i[ show ]
 
   def index
-    @likes = Like.all
-    render json: @likes, include: [:user, :study], except: [:created_at, :updated_at]
+    @likes = Like.where(study_id: params[:study_id])
+    render json: @likes, except: [:created_at, :updated_at]
+  end
+
+  def user
+    @likes = Like.where(user_id: params[:id])
+    render json: @likes, except: [:created_at, :updated_at]
   end
 
   def create
