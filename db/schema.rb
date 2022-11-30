@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_30_033601) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "certificates", force: :cascade do |t|
     t.string "title", null: false
     t.string "link", null: false
-    t.date "achieved_date"
+    t.date "achieved_date", null: false
     t.date "expiration_date"
     t.bigint "user_id", null: false
     t.bigint "technology_id", null: false
@@ -28,9 +28,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.index ["user_id"], name: "index_certificates_on_user_id"
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.string "content", null: false
+    t.bigint "user_id", null: false
+    t.bigint "study_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_id"], name: "index_comments_on_study_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "study_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["study_id"], name: "index_likes_on_study_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
   create_table "professions", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "technology_id"
+    t.bigint "user_id", null: false
+    t.bigint "technology_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["technology_id"], name: "index_professions_on_technology_id"
@@ -42,8 +61,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.text "experience"
     t.boolean "completed", default: false
     t.integer "hours_taken", default: 0, null: false
-    t.bigint "user_id"
-    t.bigint "technology_id"
+    t.bigint "user_id", null: false
+    t.bigint "technology_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["technology_id"], name: "index_studies_on_technology_id"
@@ -62,6 +81,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
     t.string "fullname", null: false
     t.string "email", null: false
     t.string "password_digest"
+    t.string "goal", null: false
     t.string "image"
     t.text "bio"
     t.string "city", null: false
@@ -77,4 +97,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_04_132200) do
 
   add_foreign_key "certificates", "technologies"
   add_foreign_key "certificates", "users"
+  add_foreign_key "comments", "studies"
+  add_foreign_key "comments", "users"
+  add_foreign_key "likes", "studies"
+  add_foreign_key "likes", "users"
+  add_foreign_key "professions", "technologies"
+  add_foreign_key "professions", "users"
+  add_foreign_key "studies", "technologies"
+  add_foreign_key "studies", "users"
 end

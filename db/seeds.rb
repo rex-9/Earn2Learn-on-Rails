@@ -6,15 +6,58 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-rex = User.create(email: "dante@dmc.com", password: "password", username: "Rex", fullname: "Htet Naing", city: "Yangon", birthdate: "18-03-2000", phone: "09443112251")
-sasa = User.create(email: "sasa@sasa.com", password: "password", username: "SaSa", fullname: "Sa Aung Htet Nyein", city: "Yangon", birthdate: "07-11-1999", phone: "09443112250")
+rex = User.create(
+  email: "dante@dmc.com",
+  password: "password",
+  username: "Rex",
+  fullname: "Htet Naing",
+  goal: "Software Developer",
+  city: "Yangon",
+  birthdate: "18-03-2000",
+  phone: "09443112251"
+)
+sasa = User.create(
+  email: "sasa@sasa.com",
+  password: "password",
+  username: "SaSa",
+  fullname: "Sa Aung Htet Nyein",
+  goal: "Data Scientist",
+  city: "Yangon",
+  birthdate: "07-11-1999",
+  phone: "09443112250"
+)
 
 react = Technology.create(name: "React")
 ruby = Technology.create(name: "Ruby")
 
-study1 = Study.create(topic: "State Management", user_id: 1, technology_id: 1)
-study2 = Study.create(topic: "Object Oriented Programming", user_id: 2, technology_id: 2)
+study1 = Study.create(
+  topic: "State Management",
+  user_id: 1,
+  technology_id: 1
+)
+study2 = Study.create(
+  topic: "Object Oriented Programming",
+  user_id: 2,
+  technology_id: 2
+)
 
-certificate = Certificate.create(title: "React Master", link: "https://www.credential.net/profile/htetnaingnaing703191/wallet", user_id: 1, technology_id: 1)
+certificate = Certificate.create(
+  title: "React Master",
+  link: "https://www.credential.net/profile/htetnaingnaing703191/wallet",
+  achieved_date: "2021-10-10",
+  user_id: 1,
+  technology_id: 1
+)
+
+Like.create(
+  user_id: 1,
+  study_id: 1,
+)
+
+Comment.create(
+  content: "This is a comment",
+  user_id: 1,
+  study_id: 1,
+)
 
 rex.technologies << [react, ruby]

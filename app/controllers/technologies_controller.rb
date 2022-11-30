@@ -12,7 +12,7 @@ class TechnologiesController < ApplicationController
   # GET /technologies/1
   def show
     if @technology
-      render json: @technology, includes: [:professions, :users]
+      render json: @technology, includes: [:professions, :users], except: [:created_at, :updated_at]
     else
       render json: { message: "Technology not found" }, status: :unprocessable_entity
     end

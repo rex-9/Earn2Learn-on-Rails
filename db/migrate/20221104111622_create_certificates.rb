@@ -3,7 +3,7 @@ class CreateCertificates < ActiveRecord::Migration[7.0]
     create_table :certificates do |t|
       t.string :title,                null: false, index: true
       t.string :link,                 null: false
-      t.date :achieved_date
+      t.date :achieved_date,          null: false
       t.date :expiration_date
 
       t.references :user,             null: false, foreign_key: true, index: true

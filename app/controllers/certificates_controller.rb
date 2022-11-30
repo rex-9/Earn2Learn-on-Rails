@@ -6,13 +6,13 @@ class CertificatesController < ApplicationController
   def index
     @certificates = Certificate.all.order(:id)
 
-    render json: @certificates, include: [:user, :technology]
+    render json: @certificates, include: [:user, :technology], except: [:created_at, :updated_at]
   end
 
   # GET /certificates/1
   def show
     if @certificate
-      render json: @certificate, include: [:user, :technology]
+      render json: @certificate, include: [:user, :technology], except: [:created_at, :updated_at]
     else
       render json: { message: "Certificate not found" }, status: :unprocessable_entity
     end
