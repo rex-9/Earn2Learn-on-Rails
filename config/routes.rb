@@ -9,10 +9,11 @@ Rails.application.routes.draw do
 
   get '/technologies/:id/users', to: 'professions#technology'
 
-  resources :technologies do
-    resources :studies, only: [:index]
-    resources :certificates, only: [:index]
-  end
+  resources :technologies
+  # do
+  #   resources :studies, only: [:index]
+  #   resources :certificates, only: [:index]
+  # end
 
   resources :users do
     resources :studies, only: [:index]

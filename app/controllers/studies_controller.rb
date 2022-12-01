@@ -2,11 +2,11 @@ class StudiesController < ApplicationController
   before_action :authorize, except: [:index]
   before_action :set_study, only: %i[ show update destroy ]
 
-  # GET /studies
+  # GET /users/1/studies
   def index
     @studies = User.find(params[:user_id]).studies.order(:topic)
 
-    render json: @studies, include: [:user, :technology], except: [:created_at, :updated_at]
+    render json: @studies, include: [:user, :technology, :likes, :comments], except: [:created_at, :updated_at]
   end
 
   # GET /studies
