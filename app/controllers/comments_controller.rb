@@ -4,12 +4,12 @@ class CommentsController < ApplicationController
 
   def index
     comments = Comment.where(study_id: params[:study_id])
-    render json: comments
+    render json: { data: comments, status: "success" }
   end
 
   def user
     comments = Comment.where(user_id: params[:id])
-    render json: comments
+    render json: { data: comments, status: "success" }
   end
 
   def create
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   def destroy
     if @comment
       if @comment.destroy
-        render json: { status: "success", message: "Comment Deleted" }
+        render json: { data: @comment, status: "success" }
       else
         render json: { error: "Can't delete the Comment" }, status: :unprocessable_entity
       end

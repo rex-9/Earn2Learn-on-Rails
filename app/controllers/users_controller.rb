@@ -21,13 +21,13 @@ class UsersController < ApplicationController
   def index
     users = User.all.order(:username)
 
-    render json: users
+    render json: { data: users, status: "success" }
   end
 
   # GET /users/1
   def show
     if @user
-      render json: @user
+      render json: { data: @user, status: "success" }
     else
       render json: { error: "User not found", status: "failure" }, status: :unprocessable_entity
     end
@@ -61,9 +61,9 @@ class UsersController < ApplicationController
         render json: { error: "User can't be deleted. This user, #{user.username} has association to #{user.studies.length}-Studies, #{user.certificates.length}-Certificates and #{user.technologies.length}-Technologies." }, status: :unprocessable_entity
       else
         if @user.destroy
-          render json: { deleted: @user }
+          render json: { data: @user, status: "success" },
         else
-          render json: @user.errors, status: :unprocessable_entity
+          render json: { error: @user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
         end
       end
     else
@@ -79,6 +79,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :fullname, :bio, :city, :phone, :birthdate, :role, :email, :password, :image, :github, :linkedin)
+      params.permit(:username, :fullname, :goal, :bio, :city, :phone, :birthdate, :role, :email, :password, :image, :github, :linkedin)
     end
 end

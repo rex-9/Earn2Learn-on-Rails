@@ -6,35 +6,35 @@ class TechnologiesController < ApplicationController
   def index
     @technologies = Technology.all.order(:id)
 
-    render json: @technologies
+    render json: { data: @technologies, status: "success" }
   end
 
   # GET /technologies/1
   def show
     if @technology
-      render json: @technology
+      render json: { data: @technology, status: "success" }
     else
-      render json: { message: "Technology not found" }, status: :unprocessable_entity
+      render json: { status: "failure", error: @technology.errors }, status: :unprocessable_entity
     end
   end
 
   # POST /technologies
   def create
-    @technology = Technology.new(technology_params)
+    technology = Technology.new(technology_params)
 
-    if @technology.save
-      render json: @technology, status: :created
+    if technology.save
+      render json: { data: technology, status: "success" }, status: :created
     else
-      render json: @technology.errors, status: :unprocessable_entity
+      render json: { status: "failure", error: technology.errors }, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /technologies/1
   def update
     if @technology.update(technology_params)
-      render json: @technology
+      render json: { data: @technology, status: "success" }
     else
-      render json: @technology.errors, status: :unprocessable_entity
+      render json: { status: "failure", error: @technology.errors }, status: :unprocessable_entity
     end
   end
 
@@ -45,13 +45,13 @@ class TechnologiesController < ApplicationController
         render json: { error: "Technology can't be deleted. This technology, #{@technology.name} has association to #{@technology.studies.length}-Studies, #{@technology.certificates.length}-Certificates and #{@technology.users.length}-Users." }, status: :unprocessable_entity
       else
         if @technology.destroy
-          render json: { deleted: @technology }
+          render json: { data: @technology, status: "success" }
         else
-          render json: { error: "Can't delete the Technology" }, status: :unprocessable_entity
+          render json: { status: "failure", error: @technology.errors }, status: :unprocessable_entity
         end
       end
     else
-      render json: { message: "Technology not found" }, status: :unprocessable_entity
+      render json: { status: "failure", error: "Technology not found" }, status: :unprocessable_entity
     end
   end
 
@@ -64,6 +64,6 @@ class TechnologiesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def technology_params
-      params.require(:technology).permit(:name)
+      params.permit(:name)
     end
 end

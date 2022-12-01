@@ -23,7 +23,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins "https://etl.robust.best"
+    origins "https://earn2learn.vercel.app"
 
     resource "*",
       headers: :any,
@@ -31,7 +31,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   end
 
   allow do
-    origins "https://earn2learn.vercel.app"
+    origins "https://etl.robust.best"
 
     resource "*",
       headers: :any,

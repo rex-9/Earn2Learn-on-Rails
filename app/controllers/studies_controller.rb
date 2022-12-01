@@ -13,13 +13,13 @@ class StudiesController < ApplicationController
   def all
     @studies = Study.all.order(:topic)
 
-    render json: @studies
+    render json: { data: @studies, status: "success" }
   end
 
   # GET /studies/1
   def show
     if @study
-      render json: @study
+      render json:{ data: @study, status: "success" }
     else
       render json: { error: "Study not found", status: "failure" }, status: :unprocessable_entity
     end
