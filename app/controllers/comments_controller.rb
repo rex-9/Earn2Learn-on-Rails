@@ -4,12 +4,12 @@ class CommentsController < ApplicationController
 
   def index
     comments = Comment.where(study_id: params[:study_id])
-    render json: { data: comments, status: "success" }
+    render json: comments
   end
 
   def user
     comments = Comment.where(user_id: params[:id])
-    render json: { data: comments, status: "success" }
+    render json: comments
   end
 
   def create

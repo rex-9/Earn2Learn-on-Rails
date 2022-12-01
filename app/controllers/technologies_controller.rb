@@ -6,13 +6,13 @@ class TechnologiesController < ApplicationController
   def index
     @technologies = Technology.all.order(:id)
 
-    render json: { data: @technologies, status: "success" }
+    render json: @technologies
   end
 
   # GET /technologies/1
   def show
     if @technology
-      render json: { data: @technology, status: "success" }
+      render json: @technology
     else
       render json: { status: "failure", error: @technology.errors }, status: :unprocessable_entity
     end

@@ -21,13 +21,13 @@ class UsersController < ApplicationController
   def index
     users = User.all.order(:username)
 
-    render json: { data: users, status: "success" }
+    render json: users
   end
 
   # GET /users/1
   def show
     if @user
-      render json: { data: @user, status: "success" }
+      render json: @user
     else
       render json: { error: "User not found", status: "failure" }, status: :unprocessable_entity
     end
@@ -61,7 +61,7 @@ class UsersController < ApplicationController
         render json: { error: "User can't be deleted. This user, #{user.username} has association to #{user.studies.length}-Studies, #{user.certificates.length}-Certificates and #{user.technologies.length}-Technologies." }, status: :unprocessable_entity
       else
         if @user.destroy
-          render json: { data: @user, status: "success" },
+          render json: { data: @user, status: "success" }
         else
           render json: { error: @user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
         end

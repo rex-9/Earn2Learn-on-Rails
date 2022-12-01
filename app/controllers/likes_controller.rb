@@ -3,12 +3,12 @@ class LikesController < ApplicationController
 
   def index
     likes = Like.where(study_id: params[:study_id])
-    render json: { data: likes, status: "success" }
+    render json: likes
   end
 
   def user
     likes = Like.where(user_id: params[:id])
-    render json: { data: likes, status: "success" }
+    render json: likes
   end
 
   def create

@@ -6,13 +6,13 @@ class CertificatesController < ApplicationController
   def index
     certificates = Certificate.all.order(:id)
 
-    render json: { data: certificates, status: "success" }
+    render json: certificates
   end
 
   # GET /certificates/1
   def show
     if @certificate
-      render json: { data: @certificate, status: "success" }
+      render json: @certificate
     else
       render json: { error: @certificate.errors, status: "failure" }, status: :unprocessable_entity
     end
