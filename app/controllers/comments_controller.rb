@@ -4,12 +4,11 @@ class CommentsController < ApplicationController
 
   def index
     comments = Comment.where(study_id: params[:study_id])
-    render json: comments, include: [:user], except: [:created_at, :updated_at]
-  end
+    render json: comments
 
   def user
     comments = Comment.where(user_id: params[:id])
-    render json: comments, except: [:created_at, :updated_at]
+    render json: comments
   end
 
   def create
@@ -42,6 +41,6 @@ class CommentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def comment_params
-      params.permit(:content, :user_id, :study_id)
+      params.permit(:content, :user_id, :study_id, :username)
     end
 end

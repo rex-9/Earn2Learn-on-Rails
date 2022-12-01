@@ -6,13 +6,13 @@ class TechnologiesController < ApplicationController
   def index
     @technologies = Technology.all.order(:id)
 
-    render json: @technologies, include: [:users, :studies, :certificates], except: [:created_at, :updated_at]
+    render json: @technologies
   end
 
   # GET /technologies/1
   def show
     if @technology
-      render json: @technology, include: [:users, :studies, :certificates], except: [:created_at, :updated_at]
+      render json: @technology
     else
       render json: { message: "Technology not found" }, status: :unprocessable_entity
     end

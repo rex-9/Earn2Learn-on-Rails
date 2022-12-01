@@ -21,13 +21,13 @@ class UsersController < ApplicationController
   def index
     users = User.all.order(:username)
 
-    render json: users, include: [:studies, :technologies, :certificates], except: [:password_digest, :created_at, :updated_at]
+    render json: users
   end
 
   # GET /users/1
   def show
     if @user
-      render json: @user, include: [:studies, :technologies, :certificates], except: [:password_digest, :created_at, :updated_at]
+      render json: @user
     else
       render json: { error: "User not found", status: "failure" }, status: :unprocessable_entity
     end
