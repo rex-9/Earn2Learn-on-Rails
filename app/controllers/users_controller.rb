@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    users = User.all.order(:username)
+    users = User.all
 
     render json: users
   end
