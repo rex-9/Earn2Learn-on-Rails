@@ -9,5 +9,6 @@ class Like < ApplicationRecord
 
   def update_study_like_count
     self.study.like_count = self.study.likes.count
+    self.study.save!
   end
 end

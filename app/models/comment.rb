@@ -11,5 +11,6 @@ class Comment < ApplicationRecord
 
   def update_study_comment_count
     self.study.comment_count = self.study.comments.count
+    self.study.save!
   end
 end
