@@ -62,6 +62,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_033601) do
     t.text "experience"
     t.boolean "completed", default: false
     t.integer "hours_taken", default: 0, null: false
+    t.string "like_count", default: "0", null: false
+    t.string "comment_count", default: "0", null: false
     t.bigint "user_id", null: false
     t.bigint "technology_id", null: false
     t.datetime "created_at", null: false
@@ -73,6 +75,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_033601) do
 
   create_table "technologies", force: :cascade do |t|
     t.string "name", null: false
+    t.string "user_count", default: "0", null: false
+    t.string "study_count", default: "0", null: false
+    t.string "certificate_count", default: "0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -91,6 +96,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_033601) do
     t.string "role", default: "learner", null: false
     t.string "github"
     t.string "linkedin"
+    t.string "tech_count", default: "0", null: false
+    t.string "study_count", default: "0", null: false
+    t.string "certificate_count", default: "0", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_users_on_username"

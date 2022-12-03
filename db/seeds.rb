@@ -85,10 +85,12 @@ Comment.create(
   content: "The First comment",
   user_id: 1,
   study_id: 1,
+  username: dante.username
 )
 
 Comment.create(
   content: "The Second comment",
   user_id: 1,
   study_id: 2,
+  username: dante.username
 )
