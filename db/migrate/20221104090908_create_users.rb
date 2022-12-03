@@ -14,9 +14,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :role,                 null: false, default: 'learner'
       t.string :github
       t.string :linkedin
-      t.string :tech_count,           null: false, default: 0
-      t.string :study_count,          null: false, default: 0
-      t.string :certificate_count,    null: false, default: 0
 
       t.timestamps
     end
