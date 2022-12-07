@@ -10,5 +10,5 @@ class User < ApplicationRecord
   has_many :comments
 
   validates :username, :email, :phone,          uniqueness: true
-  validates :fullname, :city, :birthdate, :username, :email, :phone,       presence: true
+  validates :fullname, :goal, :city, :birthdate, :username, :email, :phone,       presence: true
 end
