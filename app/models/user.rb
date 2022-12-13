@@ -10,5 +10,6 @@ class User < ApplicationRecord
   has_many :comments
 
   validates :username, :email, :phone,          uniqueness: true
-  validates :fullname, :goal, :city, :birthdate, :username, :email, :phone,       presence: true
+  validates :fullname, :catchphrase, :goal, :views, :city, :birthdate, :username, :email, :phone,       presence: true
+  validates :catchphrase,                       length: { in: 3..120 }
 end

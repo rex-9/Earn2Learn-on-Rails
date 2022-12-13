@@ -84,7 +84,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_30_033601) do
     t.string "fullname", null: false
     t.string "email", null: false
     t.string "password_digest"
+    t.string "catchphrase", null: false
     t.string "goal", null: false
+    t.integer "views", default: 0
     t.string "image"
     t.text "bio"
     t.string "city", null: false
