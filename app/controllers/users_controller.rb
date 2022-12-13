@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
-    users = User.all
+    users = User.all.order(:id)
 
     render json: users
   end
@@ -79,6 +79,6 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.permit(:username, :fullname, :goal, :bio, :city, :phone, :birthdate, :role, :email, :password, :image, :github, :linkedin)
+      params.permit(:username, :fullname, :catchphrase, :views, :goal, :bio, :city, :phone, :birthdate, :role, :email, :password, :image, :github, :linkedin)
     end
 end
