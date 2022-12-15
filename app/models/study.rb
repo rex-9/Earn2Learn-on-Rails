@@ -6,4 +6,5 @@ class Study < ApplicationRecord
   has_many :comments
 
   validates :topic, :hours_taken,      presence: true
+  validates_length_of :topic,          minimum: 3
 end

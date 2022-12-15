@@ -37,7 +37,7 @@ class StudiesController < ApplicationController
     if !existing_study
       study = Study.new(study_params)
       study.save
-      render json: { data: study, status: "success" }, status: :created
+      render json: study
     else
       render json: { error: "Duplicate Topic for the specific Technology by a specific User", status: "failure" }, status: :unprocessable_entity
     end
