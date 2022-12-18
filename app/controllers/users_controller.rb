@@ -47,10 +47,14 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    if @user.update(user_params)
-      render json: { data: @user, status: "success" }
+    if @user
+      if @user.update(user_params)
+        render json: @user
+      else
+        render json: { error: @user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
+      end
     else
-      render json: { error: @user.errors.full_messages, status: "failure" }, status: :unprocessable_entity
+      render json: { error: "User not found", status: "failure" }
     end
   end
 

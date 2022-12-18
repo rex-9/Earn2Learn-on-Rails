@@ -8,7 +8,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :catchphrase,          null: false
       t.string :goal,                 null: false
       t.integer :views,               default: 0
-      t.string :image
       t.text :bio
       t.string :city,                 null: false
       t.date :birthdate,              null: false
