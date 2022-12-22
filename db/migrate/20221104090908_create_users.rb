@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :fullname,             null: false
       t.string :email,                null: false, unique: true
       t.string :password_digest
-      t.string :catchphrase,          null: false
+      t.string :catchphrase,          null: false, default: 'Dedicated Learner with Strong Motivation'
       t.string :goal,                 null: false
       t.integer :views,               default: 0
       t.text :bio

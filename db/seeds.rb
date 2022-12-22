@@ -19,7 +19,7 @@ dante = User.create(
   phone: "09443112251"
 )
 
-rex = User.create(
+User.create(
   email: "rex@soul.com",
   password: "password",
   username: "Rex",
@@ -31,7 +31,7 @@ rex = User.create(
   phone: "094431122510"
 )
 
-sasa = User.create(
+User.create(
   email: "sasa@sasa.com",
   password: "password",
   username: "SaSa",
@@ -46,12 +46,12 @@ sasa = User.create(
 react = Technology.create(name: "React")
 ruby = Technology.create(name: "Ruby")
 
-study1 = Study.create(
+Study.create(
   topic: "State Management",
   user_id: 1,
   technology_id: 1
 )
-study2 = Study.create(
+Study.create(
   topic: "Object Oriented Programming",
   user_id: 2,
   technology_id: 2
@@ -66,7 +66,7 @@ Profession.create(
   technology_id: ruby.id,
 )
 
-certificate = Certificate.create(
+Certificate.create(
   title: "React Master",
   link: "https://www.credential.net/profile/htetnaingnaing703191/wallet",
   achieved_date: "2021-10-10",
