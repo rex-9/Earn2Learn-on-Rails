@@ -1,4 +1,4 @@
-class CertificatesController < ApplicationController
+class Api::CertificatesController < ApplicationController
   before_action :authorize
   before_action :set_certificate, only: %i[ show update destroy ]
 

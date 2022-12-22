@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class Api::CommentsController < ApplicationController
   before_action :authorize, except: [:index]
   before_action :set_comment, only: %i[ destroy ]
 

@@ -1,4 +1,4 @@
-class TechnologiesController < ApplicationController
+class Api::TechnologiesController < ApplicationController
   before_action :authorize
   before_action :set_technology, only: %i[ show update destroy ]
 

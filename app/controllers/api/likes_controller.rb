@@ -1,4 +1,4 @@
-class LikesController < ApplicationController
+class Api::LikesController < ApplicationController
   before_action :authorize, except: [:index]
 
   def index

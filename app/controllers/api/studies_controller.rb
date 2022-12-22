@@ -1,4 +1,4 @@
-class StudiesController < ApplicationController
+class Api::StudiesController < ApplicationController
   before_action :authorize, except: [:index]
   before_action :set_study, only: %i[ show update destroy ]
 

@@ -1,4 +1,4 @@
-class ProfessionsController < ApplicationController
+class Api::ProfessionsController < ApplicationController
   before_action :authorize
   before_action :set_profession, only: %i[ show update destroy ]
 
