@@ -4,13 +4,13 @@ Rails.application.routes.draw do
   namespace :api do
     post 'users/login', to: 'users#login'
 
-    get '/studies', to: 'studies#all'
+    get 'studies', to: 'studies#all'
 
-    get '/users/:id/technologies', to: 'professions#user'
-    get '/users/:id/likes', to: 'likes#user'
-    get '/users/:id/comments', to: 'comments#user'
+    get 'users/:id/technologies', to: 'professions#user'
+    get 'users/:id/likes', to: 'likes#user'
+    get 'users/:id/comments', to: 'comments#user'
 
-    get '/technologies/:id/users', to: 'professions#technology'
+    get 'technologies/:id/users', to: 'professions#technology'
 
     resources :technologies
     # do

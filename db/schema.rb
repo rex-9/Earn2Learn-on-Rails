@@ -112,7 +112,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_18_133608) do
     t.string "fullname", null: false
     t.string "email", null: false
     t.string "password_digest"
-    t.string "catchphrase", null: false
+    t.string "catchphrase", default: "Dedicated Learner with Strong Motivation", null: false
     t.string "goal", null: false
     t.integer "views", default: 0
     t.text "bio"
