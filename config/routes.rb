@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  default_url_options :host => "localhost:3000"
+  default_url_options :host => "etl.robust.best"
 
   namespace :api do
     post 'users/login', to: 'users#login'
